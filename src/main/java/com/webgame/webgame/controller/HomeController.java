@@ -1,15 +1,11 @@
 package com.webgame.webgame.controller;
 
-import com.webgame.webgame.dto.gameDto.GameSaleDto;
 import com.webgame.webgame.model.Category;
 import com.webgame.webgame.model.Game;
-import com.webgame.webgame.service.accountGame.AccountGameService;
 import com.webgame.webgame.service.category.CategoryService;
 import com.webgame.webgame.service.game.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,13 +17,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/home")
 public class HomeController {
-
     @Autowired
     GameService gameService;
-
     @Autowired
     CategoryService categoryService;
-
 
     @GetMapping("/gameList/{pageNo}")
     public Map<String, Object> gameList(@PathVariable(value = "pageNo") int page) {
