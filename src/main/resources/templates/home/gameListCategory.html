@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>BDLV Gaming</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+<!--trang này trả về kết quả tìm kiếm theo tên game của user-->
+<div id="home">
+    <a th:class="home-float" th:href="@{/}" class="icons">
+        <img th:src="@{/img/home/homeFloat.png}" alt="Lỗi hiển thị">
+    </a>
+    <!-- header -->
+    <header>
+        <div class="top-header">
+            <div class="top-icons">
+                <!--                target="_blank": yêu cầu trình duyệt mở tab mới-->
+                <a href="https://www.facebook.com/" target="_blank" class="icons">
+                    <img th:src="@{/img/home/facebook.png}" alt="Lỗi hiển thị">
+                </a>
+                <a href="https://www.tiktok.com/" target="_blank" class="icons">
+                    <img th:src="@{/img/home/tiktok.png}" alt="Lỗi hiển thị">
+                </a>
+                <a href="https://x.com/Yiint24?t=_9kv36zTbhujLr5HxyLXAg&s=09" target="_blank" class="icons">
+                    <img th:src="@{/img/home/twitter.png}" alt="Lỗi hiển thị">
+                </a>
+
+            </div>
+            <div class="search">
+                <form th:action="@{/search/}" method="GEt">
+                    <label for="searchInput">
+                        <input id="searchInput" type="text" name="searchInput" autofocus
+                               placeholder="Bạn thích tựa game nào nhỉ ?">
+                    </label>
+                    <button type="submit">
+                        <img th:src="@{/img/home/search.png}" alt="Tìm kiếm">
+                    </button>
+                </form>
+            </div>
+            <a href="#" class="track-order">Đơn hàng của bạn</a>
+        </div>
+
+        <div class="main-header">
+            <div class="logo">
+                <a th:href="@{/}">
+                    <p>BDLV <span>gaming</span></p>
+                </a>
+            </div>
+            <nav class="nav-menu">
+                <a th:href="@{/#best-seller}">Game bán chạy</a>
+                <a th:href="@{/#list-newest}">Game mới ra mắt</a>
+                <div class="main-header-category">
+                    <div class="category-detail-toggle">
+                        <p>Thể loại</p>
+                        <img th:src="@{/img/home/arrowDown.png}" alt="">
+                    </div>
+                    <div class="category-detail">
+                        <a th:href="@{/category/{id}(id=${category.categoryId})}" th:each="category:${categoryList}">
+                            [[${category.categoryName}]]
+                        </a>
+                    </div>
+                </div>
+            </nav>
+            <div class="icons">
+                <a href="#"><img th:src="@{/img/home/user.png}" alt="Lỗi hiển thị"></a>
+                <a href="#"><img th:src="@{/img/home/cart.png}" alt="Lỗi hiển thị"></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- product -->
+    <div class="product">
+        <div class="product-display" id="list-newest">
+            <h1>Thể Loại: [[${category.categoryName}]]</h1>
+            <div class="product-display-list">
+                <a th:href="@{/game/{id}(id=${game.gameId})}" class="product-item" th:each="game: ${gamesListCategory}">
+                    <img th:src="@{'/uploadImgGame/' + ${game.gameImg}}" alt="lỗi hiển thị" class="product-item-image"/>
+                    <div class="product-item-infor">
+                        <p class="product-item-name" th:text="${game.gameName}"></p>
+                        <p class="product-item-price"
+                           th:text="${#strings.replace(game.price, '000.00', '.000 ')} + Đ"></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- footer -->
+    <footer>
+        <div class="footer" id="footer">
+            <div class="footer-content">
+                <div class="footer-content-left">
+                    <img th:src="@{/img/home/logo.png}" alt="logo">
+                    <p>
+                        BDLV Gaming là web bán game đa nền tảng (Steam, Epic Games, EA Games, Ubisoft) với giá cực kỳ
+                        hợp lý. BDLV Gaming cam kết mang đến trải nghiệm mua game
+                        bản quyền an toàn, uy tín và tiết kiệm.
+                    </p>
+                </div>
+                <div class="footer-content-center">
+                    <h2>Công ty BDLV GAMING</h2>
+                    <ul>
+                        <li>Trang chủ</li>
+                        <li>Về chúng tôi</li>
+                        <li>Đơn hàng của bạn</li>
+                        <li>Chính sách</li>
+                    </ul>
+                </div>
+                <div class="footer-content-right">
+                    <h2>Liên hệ với chúng tôi thông qua</h2>
+                    <ul>
+                        <li>0933-223-872</li>
+                        <li>BDLVGaming@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr/>
+            <p class="footer-copyright">
+                Copyright 2024 &copy; BDLVGaming.com - All Right Reserved
+            </p>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+    // toggle category detail
+    const listCategory = document.querySelector(".category-detail")
+    const btnToggleCategory = document.querySelector(".category-detail-toggle")
+    const toggleCategoryDetail = () => {
+        listCategory.classList.toggle("toggle-category")
+    }
+    btnToggleCategory.addEventListener("click", toggleCategoryDetail)
+
+</script>
+</body>
+</html>

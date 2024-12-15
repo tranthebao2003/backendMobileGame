@@ -1,0 +1,658 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    text-decoration: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Roboto', sans-serif;
+    /*min-height: 100vh;*/
+}
+
+:root{
+    --main-color: rgb(0, 174, 215);
+    --text-color: rgb(1, 96, 109);
+    --fontSize-main: 16px;
+    --banner-color: rgb(217, 235, 254);
+    --color-text-a: #232323;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--main-color);
+    background: linear-gradient(-45deg, rgba(34, 199, 237, 0.1), rgba(203, 166, 51, 0.1));
+}
+
+#home{
+    position: relative;
+}
+/*home -float*/
+.home-float{
+    width: 50px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 10px;
+}
+
+.home-float img {
+    width: 100%;
+    object-fit: contain;
+}
+
+/*header*/
+
+header {
+    width: 100%;
+    animation: fadeIn 2.2s;
+    box-shadow: 1px 1px 0 rgb(1, 76, 89, 0.2);
+    margin-bottom: 20px;
+}
+
+a{
+    transition: all 0.5s ease-in-out;
+    color: var(--color-text-a);
+}
+a:hover{
+    transform: scale(1.04);
+    color: var(--main-color);
+}
+
+.top-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: rgba(196, 236, 247, 0.2);
+    font-size: 18px;
+    align-items: center;
+    transition: All 0.3s ease-in-out;
+}
+
+.top-header a {
+    text-decoration: none;
+    margin-right: 15px;
+    transition: all 0.4s ease-in-out;
+    border-radius: 5px;
+
+}
+
+.top-header .track-order{
+    font-weight: 500;
+    padding: 14px;
+    background: linear-gradient(90deg, rgba(14, 203, 245, 0.2), rgba(62, 233, 249, 0.2));
+}
+
+.top-header a:hover {
+    transform: scale(1.04);
+    color: var(--main-color);
+}
+
+.top-icons .icons img{
+    width: 25px;
+    height: 25px;
+    transition: all 0.4s ease-in-out; ;
+}
+.top-icons .icons img:hover{
+    transform: scale(1.08);
+}
+
+.search{
+    position: relative;
+    height: 45px;
+    width: 40%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.search form{
+    width: 100%;
+    height: 100%;
+}
+.search input{
+    font-size: var(--fontSize-main);
+    padding: 5px 10px;
+    width: 100%;
+    height: 100%;
+    color: #025f74;
+    background: linear-gradient(90deg, rgba(14, 203, 245,0.2), rgba(62, 233, 249, 0.2))
+}
+.search input::placeholder{
+    color: var(--main-color);
+    font-weight: 500;
+}
+
+.search img{
+    top: 20%;
+    right: 2%;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    transition: all 0.4s ease-in-out; ;
+}
+
+.search img:hover{
+   transform: scale(1.08);
+}
+
+.search button{
+    cursor: pointer;
+}
+
+.main-header{
+    position: relative;
+    padding: 1.5% 4%;
+    padding-left: 6%;
+    /*border: 1px black solid;*/
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--fontSize-main);
+    font-weight: bold;
+    background: linear-gradient(90deg, rgba(14, 203, 245, 0.2), rgba(62, 233, 249, 0.2));
+}
+.main-header .logo{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+@keyframes enterAndExit {
+    0% {
+        left: -120%;
+    }
+    50%{
+        left: -35%;
+    }
+    52%,96%{
+        left: -52%; /* Thoát ra khỏi bên phải */
+    }
+    100%{
+        left: -120%;
+    }
+}
+
+.main-header .logo img{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: -25px;
+    left: -100%; /* Bắt đầu từ ngoài bên trái */
+    animation: enterAndExit 5s ease-in-out infinite 1s;
+}
+
+.main-header .logo p {
+    font-size: 26px;
+}
+
+.logo a{
+    color: var(--main-color);
+}
+
+.main-header .logo span{
+    font-weight: 400;
+}
+
+.main-header .nav-menu{
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.main-header-category{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.main-header-category img {
+    width: 20px;
+    margin-left: 5px;
+}
+
+.category-detail-toggle {
+    display: flex;
+    align-items: center;
+    color: var(--color-text-a);
+    transition: all 0.4s ease-in-out;
+}
+
+.category-detail-toggle:hover{
+    color: var(--main-color);
+    transform: scale(1.05);
+}
+
+/*phụ thuộc vị trí của main-header*/
+.category-detail{
+    width: 100%;
+    left: 0;
+    padding: 30px;
+    position: absolute;
+    top: 100%;
+    z-index: 2;
+    background: linear-gradient(45deg, rgba(200, 241, 248, 0.95), rgba(214, 249, 241, 0.95));
+    font-weight: 500;
+    font-size: 20px;
+    display: none;
+}
+
+
+.category-detail.toggle-category{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    row-gap: 30px;
+}
+
+.category-detail a{
+    text-align: center;
+}
+
+.main-header .icons{
+    display: flex;
+    gap: 30px;
+}
+.icons a img{
+    width: 25px;
+    height: 25px;
+}
+
+/*banner*/
+.banner{
+    /*border: 1px solid var(--main-color);*/
+    width: 90%;
+    height: 45vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 0 5%;
+    gap: 2.2%;
+    background: linear-gradient(-180deg, rgb(217, 235, 254), rgba(205, 238, 242, 0.2));
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 2px 2px 0 rgba(1, 55, 64, 0.4);
+}
+
+.banner img{
+    width: 60%;
+    object-fit: cover;
+}
+
+@keyframes fadeIn {
+    0%{
+        opacity: 0;
+    }
+}
+
+.banner-contents{
+    flex: 2;
+    animation: fadeIn 3s;
+    margin-left: 4%;
+    margin-top: 2%;
+}
+
+.banner-contents h2{
+    margin-bottom: 3%;
+    font-size: 27px;
+    color: var(--main-color);
+}
+
+.banner-contents p{
+    line-height: 1.8;
+    color: rgb(5, 54, 61);
+}
+
+
+/*Product*/
+
+.product{
+    padding: 1.5% 4%;
+    padding-left: 6%;
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+    flex-direction: column;
+}
+
+.category-menu{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.category-menu p{
+    width: 90%;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.category-menu-list{
+    width: 100%;
+    display: flex;
+    gap: 50px;
+    overflow-x: scroll;
+    padding: 7px 0 ;
+    border-radius: 10px;
+}
+.category-menu-list::-webkit-scrollbar{
+    display: none;
+}
+
+.category-menu-list a{
+    /*padding: 5px;*/
+    flex: 0.2;
+    min-width: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    background:  linear-gradient(45deg, rgba(0, 199, 251, 0.4), rgba(62, 233, 249, 0.2));
+    box-shadow: 5px 5px 4px rgb(1, 76, 89, 0.2);
+}
+
+.category-menu-list a img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+}
+
+.category-menu-text {
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.category-menu-list p{
+    width: 100%;
+    margin-top: 6px;
+    font-weight: bold;
+    text-align: center;
+}
+
+hr{
+    width: 100%;
+    border: 1px solid rgba(1, 96, 109,0.3);
+}
+
+/*product- item*/
+.product-display{
+    margin-top: 30px;
+}
+.product-display a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, rgba(14, 203, 245,0.2), rgba(62, 233, 249, 0.2))
+}
+.product-display a h3{
+    font-size: 25px;
+    text-align: center;
+    margin: 50px 0;
+    padding: 15px 0;
+
+
+}
+
+.product-display h2{
+    font-size: max(2vw, 24px);
+    font-weight: 600;
+}
+
+.product-display-list{
+    display: grid;
+    /* repeat(auto-fill, minmax(240px, 1fr)): Hàm repeat()
+    cho phép bạn lặp lại mẫu cột nhiều lần.
+    auto-fill là một từ khóa để trình duyệt
+    sẽ tự động lặp lại các cột cho đến khi
+    không còn đủ không gian trong hàng để
+    chứa thêm cột nào nữa.
+    đối số thứ 2 trong repeat TH này là kích thước của cột
+
+    minmax cho ta chọn giá trị tối thiểu và tối đa, 1fr nó
+    là đơn vị trong grid nó chiếm 1 phần của không gian còn lại
+    kiểu giống như flex:1, flex:2 ấy*/
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    margin-top: 30px;
+    gap: 30px;
+    row-gap: 50px;
+}
+.product-display-list.best-seller a{
+    background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(105, 236, 251, 0.4));
+}
+
+.product-display-list a{
+    color: var(--main-color);
+    cursor: pointer;
+    background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(251, 206, 105, 0.4));
+}
+
+
+.product-item{
+    width: 100%;
+    min-height: 200px;
+    margin-top: auto;
+    border-radius: 15px;
+    box-shadow: 5px 5px 10px rgba(0, 37, 45, 0.3);
+    transition: 0.3s ease-in-out;
+    animation: fadeIn 1s
+}
+
+
+.product-item-image{
+    width: 100%;
+    /* để 4 thông số thì 2 thông số đầu
+    là phía trên còn 2 thông số sau phía dưới */
+    border-radius: 15px 15px 0 0;
+}
+
+.product-item-infor{
+    width: 100%;
+    padding: 0 6px;
+}
+.product-item-name{
+    font-size: 23px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.product-item-price{
+    color: var(--text-color);
+    font-size: 22px;
+    font-weight: 500;
+    align-items: center;
+    text-align: center;
+    margin: 10px 0;
+}
+
+/*footer*/
+.footer{
+    margin-top: 70px;
+    color: var(--main-color);
+    background-color: rgba(100, 177, 199, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 6vw;
+    padding-top: 60px;
+    font-size: 18px;
+}
+
+.footer-content{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.2fr;
+    gap: 50px;
+}
+
+.footer-content-left img{
+    width:100px;
+}
+
+.footer-content-right,
+.footer-content-center {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+}
+
+.footer-content-left{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-content-left li,
+.footer-content-right li,
+.footer-content-center li{
+    list-style: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.footer-content-right li{
+    cursor:default
+}
+
+.footer-content-left li:hover,
+.footer-content-center li:hover{
+    color: var(--main-color);
+}
+
+.footer-content-left h2,
+.footer-content-center h2{
+    color: var(--main-color);
+}
+
+.footer hr{
+    width: 100%;
+    height: 2px;
+    margin: 20px 0;
+    background-color: var(--main-color);
+    border: none;
+}
+
+@media (max-width: 1050px) {
+    .banner img{
+        width: 40%;
+        object-fit: cover;
+    }
+
+    .main-header{
+        justify-content: center;
+        gap: 28px;
+        padding-right: 5%;
+        padding-left: 4%;
+    }
+    .main-header .nav-menu{
+        gap: 14px;
+    }
+
+    .main-header .logo img{
+        top: -20px;
+        width: 60px;
+        height: 60px;
+    }
+    .main-header .logo p{
+        font-size: 20px;
+    }
+    .nav-menu a, p{
+        font-size: 15px;
+    }
+    .footer-content-left{
+        flex-direction: column;
+    }
+    .top-header a{
+        font-size: 16px;
+    }
+    .product-item-name{
+        font-size: 20px;
+    }
+    .banner{
+        height: 32vh;
+    }
+}
+@media (max-width: 750px) {
+    .top-header{
+        padding: 10px 5px;
+    }
+    .top-icons .icons img{
+        width: 20px;
+        height: 20px;
+    }
+    .top-icons a{
+        margin-right: 0;
+    }
+    .search img{
+        display: none;
+    }
+    .top-header .track-order{
+        margin-right: 0;
+        padding: 10px;
+        font-weight: 400;
+        font-size: 15px;
+    }
+    .search input{
+        font-size: 15px;
+        height: 80%;
+        margin-top: 4px;
+    }
+    .search input::placeholder {
+        opacity: 0;
+    }
+    .main-header .nav-menu{
+        display: none;
+    }
+    .main-header {
+        justify-content: space-between;
+        padding-right: 10%;
+        padding-left: 16%;
+    }
+    .main-header .logo img{
+        top: -12px;
+        width: 45px;
+        height: 45px;
+    }
+    .top-icons{
+        margin-top: 2px;
+    }
+    .banner img{
+        display: none;
+    }
+
+    .product-display a h3{
+        font-size: 20px;
+    }
+
+    .banner-contents p{
+        padding: 10px 5px;
+        padding-right: 10px;
+    }
+
+    .footer-content{
+        display: flex;
+        flex-direction: column;
+    }
+    .footer-content h2{
+        font-size: 20px;
+    }
+    .footer-content-left{
+        width: 100%;
+        align-items: start;
+    }
+    h1{
+        font-size: 24px;
+    }
+    .banner-contents h2{
+        font-size: 22px;
+    }
+    .banner{
+        height: auto;
+    }
+}

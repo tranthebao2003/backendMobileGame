@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <link rel="stylesheet" th:href="@{/css/user.css}">
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Xử lý sự kiện tab
+      const tabs = document.querySelectorAll(".tab-menu li");
+      const panes = document.querySelectorAll(".tab-pane");
+
+      // Lặp qua từng tab để gắn sự kiện click
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", function () {
+          // Bỏ trạng thái "active" của tất cả các tab và nội dung
+          tabs.forEach((t) => t.classList.remove("active"));
+          panes.forEach((pane) => pane.classList.remove("active"));
+
+          // Kích hoạt tab được chọn và nội dung tương ứng
+          const targetTab = this.getAttribute("data-tab"); // Lấy giá trị của thuộc tính "data-tab"
+          document.getElementById(targetTab).classList.add("active"); // Hiển thị nội dung của tab
+          this.classList.add("active"); // Đánh dấu tab hiện tại là "active"
+        });
+      });
+
+      // Xử lý nút "Thêm email"
+      const addEmailButton = document.getElementById("add-email");
+      if (addEmailButton) {
+        addEmailButton.addEventListener("click", function (e) {
+          e.preventDefault();
+          alert("Chức năng thêm email đang được phát triển!");
+        });
+      }
+
+      // Xử lý nút "Thay đổi số điện thoại"
+      const changePhoneButton = document.getElementById("change-phone");
+      if (changePhoneButton) {
+        changePhoneButton.addEventListener("click", function (e) {
+          e.preventDefault();
+          alert("Chức năng thay đổi số điện thoại đang được phát triển!");
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+    <!--    header-->
+    <header>
+      <div class="top-header">
+        <div class="top-icons">
+          <a href="#" class="icons">
+            <img th:src="@{/img/home/facebook.png}" alt="Lỗi hiển thị"></img>
+          </a>
+          <a href="#" class="icons">
+            <img th:src="@{/img/home/tiktok.png}" alt="Lỗi hiển thị"></img>
+          </a>
+          <a href="#" class="icons">
+            <img th:src="@{/img/home/twitter.png}" alt="Lỗi hiển thị"></img>
+          </a>
+
+        </div>
+        <div class="search">
+          <input type="text" name="inputName" autofocus placeholder="Bạn thích tựa game nào nhỉ ?">
+          <a href="#"><img th:src="@{/img/home/search.png}" alt="Lỗi hiển thị"></img></a>
+        </div>
+        <a href="#">Theo dõi đơn hàng</a>
+      </div>
+
+      <div class="main-header">
+        <div class="logo">
+          <img th:src="@{/img/home/logo.png}" alt="logo">
+          <p>BDLV <span>gaming</span></p>
+        </div>
+        <nav class="nav-menu">
+          <a href="#">Trang chủ</a>
+          <a href="#">Game bán chạy</a>
+          <a href="#">Game mới ra mắt</a>
+          <a href="#">Thể loại</a>
+        </nav>
+        <div class="icons">
+          <a th:href="@{/user_info}"><img th:src="@{/img/home/user.png}" alt="Lỗi hiển thị"></img></a>
+          <a th:href="@{/cart}"><img th:src="@{/img/home/cart.png}" alt="Lỗi hiển thị"></img></a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+      <aside class="tab-menu">
+        <!-- Tên, chỉnh sửa hồ sơ -->
+        <div class="profile">
+          <a href="#"><img th:src="@{/img/user/avt2.jpg}" alt="Profile" class="profile-img"></img></a>
+
+          <p class="username" th:text="${userInfo.fullName}"></p>
+          <a href="#" class="edit-profile">Sửa Hồ Sơ</a>
+        </div>
+
+        <!-- Menu -->
+        <ul>
+          <li data-tab="profile" >
+            <i class="icon user-icon"></i>
+            Tài Khoản Của Tôi
+          </li>
+          <li data-tab="orders" class="active">
+            <i class="icon orders-icon"></i>
+            Đơn Mua
+          </li>
+          <li data-tab="notifications">
+            <i class="icon notifications-icon"></i>
+            Thông Báo
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Tab Content -->
+      <main class="tab-content">
+        <!-- Tài Khoản Của Tôi -->
+        <div id="profile" class="tab-pane">
+          <h2>Hồ Sơ Của Tôi</h2>
+          <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+          <form id="profile-form"
+                th:action="@{/register_login}"
+                method="post"
+                role="form"
+                th:object="${userInfo}"
+          >
+            <div class="col1">
+              <div class="col2">
+                <label for="username">Tên đăng nhập</label>
+                <input type="text" id="username" th:value="${userInfo.fullName}" disabled>
+<!--                <p class="note">Tên Đăng nhập chỉ có thể thay đổi một lần.</p>-->
+
+                <label for="name">Đổi mật khẩu</label>
+                <input type="text" id="name" placeholder="Nhập mật khẩu mới">
+
+                <label for="email">Email</label>
+                <input type="text" id="email" th:value="${userInfo.email}" disabled>
+<!--                <a href="#" id="add-email">Thêm</a>-->
+              </div>
+
+              <div class="profile-container">
+                <div class="profile-img-container">
+                  <img id="profileImg" th:src="@{/img/user/avt2.jpg}" alt="Avatar" class="profile-img"></img>
+                  <input type="file" id="file-input" accept="image/*" style="display: none;">
+                  <button id="change-avatar-btn">Thay đổi ảnh</button>
+
+                  <p>Dụng lượng file tối đa 1 MB
+                    Định dạng:.JPEG, .PNG</p>
+                </div>
+              </div>
+            </div>
+                <label for="phone">Số điện thoại</label>
+                <div class="phone-container">
+                  <input type="text" id="phone" th:value="${userInfo.phone}" disabled>
+                  <a href="#" id="change-phone">Thay Đổi</a>
+                </div>
+
+<!--            <label>Giới tính</label>-->
+<!--            <div class="gender-container">-->
+<!--              <input type="radio" id="male" name="gender" value="Nam">-->
+<!--              <label for="male">Nam</label>-->
+<!--              <input type="radio" id="female" name="gender" value="Nữ">-->
+<!--              <label for="female">Nữ</label>-->
+<!--              <input type="radio" id="other" name="gender" value="Khác">-->
+<!--              <label for="other">Khác</label>-->
+<!--            </div>-->
+
+<!--            <label for="dob">Ngày sinh</label>-->
+<!--            <div class="dob-container" id="dob">-->
+<!--              <select id="day">-->
+<!--&lt;!&ndash;                <option>Ngày</option>&ndash;&gt;-->
+<!--                <option>01</option> <option>02</option> <option>03</option> <option>04</option> <option>05</option>-->
+<!--                <option>06</option> <option>07</option> <option>08</option> <option>09</option> <option>10</option>-->
+<!--                <option>11</option> <option>12</option> <option>13</option> <option>14</option> <option>15</option>-->
+<!--                <option>16</option> <option>17</option> <option>18</option> <option>19</option> <option>20</option>-->
+<!--                <option>21</option> <option>22</option> <option>23</option> <option>24</option> <option>25</option>-->
+<!--                <option>26</option> <option>27</option> <option>28</option> <option>29</option> <option>30</option>-->
+<!--                <option>31</option>-->
+<!--                &lt;!&ndash; Thêm giá trị &ndash;&gt;-->
+<!--              </select>-->
+<!--              <select id="month">-->
+<!--&lt;!&ndash;                <option>Tháng</option>&ndash;&gt;-->
+<!--                <option>01</option> <option>02</option> <option>03</option> <option>04</option>-->
+<!--                <option>05</option> <option>06</option> <option>07</option> <option>08</option>-->
+<!--                <option>09</option> <option>10</option> <option>11</option> <option>12</option>-->
+<!--                &lt;!&ndash; Thêm giá trị &ndash;&gt;-->
+<!--              </select>-->
+<!--              <select id="year">-->
+<!--                <option>Năm</option>-->
+<!--                &lt;!&ndash; Thêm giá trị &ndash;&gt;-->
+<!--              </select>-->
+<!--            </div>-->
+
+            <button type="submit" class="save-btn">Lưu</button>
+          </form>
+        </div>
+
+        <div id="orders" class="tab-pane active">
+          <h2>Đơn Mua</h2>
+          <div class="order">
+            <div class="order-header">
+              <span>Yêu thích: <strong>ODIN CLUB</strong></span>
+              <a href="#" class="chat">Chat</a>
+              <a href="#" class="view-shop">Xem Shop</a>
+            </div>
+            <div class="order-details">
+              <a href="#"><img th:src="@{/img/home/search.png}" alt="Lỗi hiển thị" class="product-img"></img></a>
+              <div class="product-info">
+                <p>Áo sơ mi cộc tay Original ODIN CLUB, Áo sơ mi nam ngắn tay form rộng, Local Brand ODIN CLUB</p>
+                <p>Phân loại hàng: Xanh navy, M</p>
+              </div>
+              <div class="price">
+                <p><span class="new-price">115.000đ</span></p>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="order-footer">
+              <div class="order-total">
+                <p>Thành tiền: <span class="total-price">48.400đ</span></p>
+              </div>
+
+              <div class="order-actions">
+                <button class="rate-button">Đánh Giá</button>
+                <button class="contact-button">Liên Hệ Người Bán</button>
+                <button class="reorder-button">Mua Lại</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thông Báo -->
+        <div id="notifications" class="tab-pane">
+          <h2>Thông Báo</h2>
+          <p>Không có thông báo nào!</p>
+        </div>
+      </main>
+    </div>
+
+
+<!--    <script>-->
+<!--      // Lấy tham chiếu tới các phần tử-->
+<!--      document.addEventListener('DOMContentLoaded', () => {-->
+<!--        const fileInput = document.getElementById('file-input');-->
+<!--        const changeImageButton = document.getElementById('change-avatar-btn');-->
+<!--        const profileImage = document.getElementById('profileImg');-->
+
+<!--        // Gắn sự kiện click-->
+<!--        changeImageButton.addEventListener('click', () => {-->
+<!--          fileInput.click();-->
+<!--        });-->
+
+<!--        // Khi người dùng chọn file-->
+<!--        fileInput.addEventListener('change', (event) => {-->
+<!--          const file = event.target.files[0];-->
+<!--          if (file) {-->
+<!--            const validTypes = ['image/jpeg', 'image/png'];-->
+<!--            if (!validTypes.includes(file.type)) {-->
+<!--              alert("Chỉ hỗ trợ các định dạng ảnh: JPG, PNG");-->
+<!--              return;-->
+<!--            }-->
+
+<!--            const reader = new FileReader();-->
+<!--            reader.onload = (e) => {-->
+<!--              profileImage.src = e.target.result;-->
+<!--            };-->
+<!--            reader.readAsDataURL(file);-->
+<!--          }-->
+<!--        });-->
+<!--      });-->
+<!--    </script>-->
+</body>
+</html>

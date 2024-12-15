@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    text-decoration: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Roboto', sans-serif;
+    /*min-height: 100vh;*/
+}
+
+:root{
+    --main-color: rgb(30, 165, 195);
+    --fontSize-main: 16px;
+    --banner-color: rgb(217, 235, 254);
+}
+
+/*body{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    color: var(--main-color);*/
+/*}*/
+
+/* General Reset */
+body, h1, p, table, th, td{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #f3f9f9;
+    color: var(--main-color);
+    line-height: 1.5;
+    margin-bottom: 50px;
+}
+
+/*header*/
+
+header {
+    width: 100%;
+    animation: fadeIn 2.2s;
+    box-shadow: 1px 1px 0 rgb(1, 76, 89, 0.2);
+    margin-bottom: 20px;
+}
+
+a{
+    transition: all 0.5s ease-in-out;
+    color: #232323;
+}
+a:hover{
+    transform: scale(1.04);
+    color: var(--main-color);
+}
+
+.top-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: rgba(196, 236, 247, 0.2);
+    font-size: 18px;
+    align-items: center;
+    transition: All 0.3s ease-in-out;
+}
+
+.top-header a {
+    text-decoration: none;
+    margin-right: 15px;
+    transition: all 0.4s ease-in-out;
+}
+
+.top-header a:hover {
+    transform: scale(1.04);
+    color: var(--main-color);
+}
+
+.top-icons .icons img{
+    width: 25px;
+    height: 25px;
+    transition: all 0.4s ease-in-out; ;
+}
+.top-icons .icons img:hover{
+    transform: scale(1.08);
+}
+
+.search{
+    position: relative;
+    height: 45px;
+    width: 40%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.search input{
+    font-size: var(--fontSize-main);
+    padding: 5px 10px;
+    width: 100%;
+    height: 100%;
+    color: #025f74;
+    background: linear-gradient(90deg, rgba(14, 203, 245,0.2), rgba(62, 233, 249, 0.2))
+}
+
+.search img{
+    top: 20%;
+    right: 2%;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    transition: all 0.4s ease-in-out; ;
+}
+
+.search img:hover{
+    transform: scale(1.08);
+}
+
+.main-header{
+    padding: 1.5% 4%;
+    padding-left: 6%;
+    /*border: 1px black solid;*/
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--fontSize-main);
+    font-weight: bold;
+}
+.main-header .logo{
+    display: flex;
+    align-items: center;
+}
+
+@keyframes enterAndExit {
+    0% {
+        left: -8%;
+    }
+    50%{
+        left: 2%;
+    }
+    55%,95%{
+        left: 0; /* Thoát ra khỏi bên phải */
+    }
+    100%{
+        left: -8%;
+    }
+}
+
+.main-header .logo img{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 8%;
+    left: -8%; /* Bắt đầu từ ngoài bên trái */
+    animation: enterAndExit 8s ease-in-out infinite 1s;
+}
+
+.main-header .logo p {
+    font-size: 26px;
+}
+
+.main-header .logo span{
+    font-weight: 400;
+}
+
+.main-header .nav-menu{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+}
+
+.main-header .icons{
+    display: flex;
+    gap: 30px;
+}
+.icons a img{
+    width: 25px;
+    height: 25px;
+}
+
+
+
+/* Header Section */
+.header-cart {
+    background-color: #d6f1f4;
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #e2e2e2;
+    color: #7d7d7d;
+}
+
+.header-cart h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.breadcrumb a {
+    color: #7d7d7d;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.breadcrumb a:hover {
+    text-decoration: none;
+}
+
+/* Cart Section */
+.cart-container {
+    width: 80%;
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+
+    padding: 15px;
+    text-align: left;
+
+}
+
+tr{
+    border-bottom: 1px solid #e2e2e2;
+}
+
+th {
+    font-size: 16px;
+    font-weight: bold;
+    color: #7d7d7d;
+}
+
+
+th:nth-child(2), td:nth-child(2) {
+    width: 30%;
+    word-break: break-word;
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 20%;
+    text-align: center;
+}
+
+td {
+
+    font-size: 14px;
+    color: #333;
+}
+
+/* Edit Control */
+.edit-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.edit-control button {
+    background-color: #d6f2f4;
+    border: 1px solid #ccc;
+    padding: 20px 20px;
+    cursor: pointer;
+}
+
+.edit-control button:hover {
+    background-color: #c5e3e6;
+}
+
+hr {
+    width: 80%;
+    border: 0;  /* Loại bỏ các border mặc định */
+    border-top: 1px solid #00134c; /* Đặt màu xanh đen cho đường kẻ ngang */
+    margin: 40px auto;
+}
+
+.cart-section {
+    padding: 20px;
+    padding-left: 60%;
+    background-color: rgba(214, 241, 244, 0);
+    color: #7d7d7d;
+}
+
+
+.cart-item p{
+    display: inline-block;
+    color: black;
+    font-size: 16px;
+}
+
+
+.price {
+    margin-left: 20%;
+    font-weight: bold;
+    color: white;
+}
+
+.btn-order button {
+    width: 150px;
+    height: 60px;
+    margin-left: 80%;
+    margin-top: 30px;
+    background-color: #00afcf;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #fff;
+}
+
+.btn-order button:hover {
+    background-color: #00929c;
+}
+
+.scroll-to-top button:hover {
+    background-color: #00e3e3;
+}
+
+.img-game {
+    display: flex;
+    align-items: center;    /* Căn giữa theo chiều dọc */
+}
+
+.img-game a img{
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+/*!* CSS cho nút mua hàng *!*/
+.btn-purchase:disabled {
+    background-color: #ccc; /* Màu nền xám cho nút disabled */
+    opacity: 0.6; /* Giảm độ sáng của nút disabled */
+}
+
+ /*Vô hiệu hóa hiệu ứng hover cho nút bị disabled*/
+.btn-purchase:disabled:hover {
+    background-color: #ccc; /* Màu nền xám cho nút disabled */
+    opacity: 0.6; /* Giảm độ sáng của nút disabled */
+}
