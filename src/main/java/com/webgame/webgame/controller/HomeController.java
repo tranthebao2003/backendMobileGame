@@ -47,14 +47,12 @@ public class HomeController {
 
     @GetMapping("/search")
     public List<Game> searchGame(
-            @RequestParam(value = "searchInput") String searchInput,
-            Model model) {
+            @RequestParam(value = "searchInput") String searchInput) {
         return gameService.getGameSearchInput(searchInput);
     }
 
     @GetMapping("/category/{id}")
-    public List<Game> getGamesByCategory(@PathVariable("id") Long categoryId,
-                                     Model model) {
+    public List<Game> getGamesByCategory(@PathVariable("id") Long categoryId) {
         // Lấy thể loại từ ID
         Category category = categoryService.getCategoryById(categoryId);
 

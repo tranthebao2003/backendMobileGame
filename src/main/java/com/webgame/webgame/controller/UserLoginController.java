@@ -39,7 +39,7 @@ public class UserLoginController {
 
     @GetMapping("user")
     public String userPage(){
-        return "home";
+        return "home/home";
     }
 
 //    @GetMapping("admin")

@@ -2,9 +2,7 @@ package com.webgame.webgame.controller;
 
 import com.webgame.webgame.model.CartGame;
 import com.webgame.webgame.service.cart.CartGameService;
-import com.webgame.webgame.service.thanhtoan.BuyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +16,7 @@ public class CartController {
 
     @Autowired
     CartGameService cartGameService;
-    @Autowired
-    BuyService buyService;
+
     @GetMapping("/cart")
     public String viewCart(Model model) {
 
@@ -41,7 +38,7 @@ public class CartController {
     }
 
     @GetMapping("/cart/delete")
-    public String deleteGameinCart(@RequestParam("gameId") Long gameId, Model model ) {
+    public String deleteGameinCart(@RequestParam("gameId") Long gameId) {
         Long userId=26L;
         cartGameService.deleteCartGame(gameId,userId);
         return "redirect:/cart";
