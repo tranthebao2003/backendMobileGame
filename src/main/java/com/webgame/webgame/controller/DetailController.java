@@ -23,11 +23,14 @@ public class DetailController {
         double getAverageScore = detailGameService.getAverageScore(gameId);
         // Lấy danh sách các review của game theo gameId
         int getTotalReviews = detailGameService.getTotalReviews(gameId);
+        long totalGameInStock = detailGameService.countAccountGamesByStatusAndGameId(false, gameId);
 
         Map<String, Object> totalReviewAverageScore = new HashMap<>();
 
         totalReviewAverageScore.put("averageScore", getAverageScore);
         totalReviewAverageScore.put("totalReview", getTotalReviews);
+        totalReviewAverageScore.put("totalGameInStock", totalGameInStock);
+
         return totalReviewAverageScore;
     }
 
