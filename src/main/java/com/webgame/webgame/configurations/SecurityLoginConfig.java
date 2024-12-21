@@ -1,8 +1,8 @@
 package com.webgame.webgame.configurations;
 
 //import com.webgame.webgame.service.userLogin.CustomAuthenticationFailureHandler;
-import com.webgame.webgame.service.userLogin.CustomSuccessLoginHandler;
-import com.webgame.webgame.service.userLogin.CustomUserLoginDetailService;
+//import com.webgame.webgame.service.userLogin.CustomSuccessLoginHandler;
+//import com.webgame.webgame.service.userLogin.CustomUserLoginDetailService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,11 +26,11 @@ import java.io.IOException;
 @Configuration
 @EnableWebSecurity
 public class SecurityLoginConfig {
-    @Autowired
-    CustomSuccessLoginHandler customSuccessHandler;
-
-    @Autowired
-    CustomUserLoginDetailService customUserLoginDetailService;
+//    @Autowired
+//    CustomSuccessLoginHandler customSuccessHandler;
+//
+//    @Autowired
+//    CustomUserLoginDetailService customUserLoginDetailService;
 
 //    @Autowired
 //    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
@@ -49,24 +49,25 @@ public class SecurityLoginConfig {
 //                        .anyRequest().authenticated())
                 .authorizeHttpRequests(requests -> requests
                         .anyRequest()
-                        .permitAll())
-                .formLogin(form -> form.loginPage("/register_login").loginProcessingUrl("/login")
-                        .successHandler(customSuccessHandler).permitAll())
-                .oauth2Login(oauth2login->{
-                    oauth2login.successHandler(new AuthenticationSuccessHandler() {
-                        @Override
-                        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                            response.sendRedirect("/login-email");
-                        }
-                    });
-                });
+                        .permitAll());
+//                .formLogin(form -> form.loginProcessingUrl("/login") // url xử lý yêu cầu đăng nhập
+//                        .permitAll());
+//                .oauth2Login(oauth2login->{
+//                    oauth2login.successHandler(new AuthenticationSuccessHandler() {
+//                        @Override
+//                        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+//                            response.sendRedirect("/login-email");
+//                        }
+//                    });
+//                }
+//                );
 
 
         return http.build();
     }
-    @Autowired
-    public void configure (AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(customUserLoginDetailService).passwordEncoder(passwordEncoder());
-    }
+//    @Autowired
+//    public void configure (AuthenticationManagerBuilder auth) throws Exception{
+//        auth.userDetailsService(customUserLoginDetailService).passwordEncoder(passwordEncoder());
+//    }
 }
 

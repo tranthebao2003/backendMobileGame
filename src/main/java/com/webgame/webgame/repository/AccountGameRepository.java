@@ -20,6 +20,8 @@ public interface AccountGameRepository extends JpaRepository<AccountGame, Long> 
     @Query("SELECT a FROM AccountGame a WHERE a.status = :status")
     List<AccountGame> findAccountGamesByStatus(@Param("status") boolean status);
 
+    AccountGame findFirstByGame_GameIdAndOrderIsNull(Long gameId);
+
     // vì câu query này làm việc với entity nên sẽ khác 1 chút
     // so với câu query làm vc với database
     // giải thích có ghi trong file note web game

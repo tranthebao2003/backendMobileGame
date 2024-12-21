@@ -23,6 +23,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     List<Game> findGamesByGameNameContainingIgnoreCase(String searchInput);
     List<Game> findByCategoryGames_Category(Category category);
 
+    Game findGameByGameId(Long gameId);
 
 
     @Query("SELECT g FROM Game g WHERE g.gameId = :gameId")

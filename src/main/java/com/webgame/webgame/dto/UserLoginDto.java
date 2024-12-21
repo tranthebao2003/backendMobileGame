@@ -7,6 +7,9 @@ public class UserLoginDto {
     private String username;
     private String phone;
 
+    public UserLoginDto() {
+    }
+
     public UserLoginDto(String email, String password, String role, String username, String phone) {
         this.email = email;
         this.password = password;
@@ -14,6 +17,12 @@ public class UserLoginDto {
         this.username = username;
         this.phone = phone;
     }
+
+    public UserLoginDto(String username, String password) {
+        this.email = username;
+        this.password = password;
+    }
+
 
     public String getEmail() {
         return email;
