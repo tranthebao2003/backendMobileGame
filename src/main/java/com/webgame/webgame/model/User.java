@@ -1,5 +1,6 @@
 package com.webgame.webgame.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,10 +44,12 @@ public class User {
     private String role;
 
     @ToString.Exclude
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user", fetch = FetchType.LAZY)
     private Collection<Orders> orders;
 
     @ToString.Exclude
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user", fetch = FetchType.LAZY)
     private Collection<Review> reviews;
 
