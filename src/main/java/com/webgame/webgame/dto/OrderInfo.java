@@ -1,4 +1,4 @@
-package com.webgame.webgame.dto.gameDto;
+package com.webgame.webgame.dto;
 
 
 import java.io.Serializable;

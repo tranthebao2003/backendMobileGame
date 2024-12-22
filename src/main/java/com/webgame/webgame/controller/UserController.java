@@ -1,5 +1,6 @@
 package com.webgame.webgame.controller;
 
+import com.webgame.webgame.dto.ItemOrderList;
 import com.webgame.webgame.dto.OrderDetailsDto;
 import com.webgame.webgame.dto.UserLoginDto;
 import com.webgame.webgame.model.AccountGame;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 //@RequestMapping("/userInfo")
 public class UserController {
     @Autowired
@@ -58,38 +59,31 @@ public class UserController {
     @Autowired
     OrderRepository orderRepository;
 
-    @GetMapping("/user/orders")
-    public String getUserOrders(Model model) {
-        // Lấy email của người dùng đã đăng nhập
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName(); // Lấy email từ Authentication
+    @PostMapping("/ordersApi/{emailUser}")
+    public ResponseEntity<List<ItemOrderList>> getUserOrders(@PathVariable String emailUser) {
 
         // Tìm user từ email
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new RuntimeException("Không tìm thấy người dùng với email: " + email);
-        }
+        User user = userRepository.findByEmail(emailUser);
 
         // Lấy danh sách đơn hàng của người dùng
         List<Orders> orders = orderRepository.findByUser(user);
 
         // Lấy thông tin mỗi order
-        List<OrderDetailsDto> orderDetailsList = new ArrayList<>();
+        List<ItemOrderList> itemOrderLists = new ArrayList<>();
         for (Orders order : orders) {
             for (AccountGame accountGame : order.getAccountGames()) {
                 // Tạo dto để trả về thông tin game, tài khoản, mật khẩu và giá tiền
-                OrderDetailsDto details = new OrderDetailsDto();
-                details.setGameName(accountGame.getGame().getGameName());
-                details.setUsername(accountGame.getUsername());
-                details.setPassword(accountGame.getPassword());
-                details.setPrice(accountGame.getGame().getPrice()); // Lấy giá từ Game
-                orderDetailsList.add(details);
+                ItemOrderList details = new ItemOrderList();
+                details.setGamename(accountGame.getGame().getGameName());
+                details.setAccount(accountGame.getUsername());
+                details.setPass(accountGame.getPassword());
+                details.setPrice(accountGame.getGame().getPrice().toString()); // Lấy giá từ Game
+                itemOrderLists.add(details);
             }
         }
 
-        model.addAttribute("orderDetailsList", orderDetailsList);
 
-        return "orders";
+        return ResponseEntity.ok(itemOrderLists);
     }
 
 }
