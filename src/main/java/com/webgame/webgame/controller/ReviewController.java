@@ -1,32 +1,37 @@
 package com.webgame.webgame.controller;
 
+import com.webgame.webgame.dto.ReviewRequest;
+import com.webgame.webgame.model.Game;
+import com.webgame.webgame.model.User;
+import com.webgame.webgame.repository.GameRepository;
+import com.webgame.webgame.repository.UserRepository;
 import com.webgame.webgame.service.review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class ReviewController {
     @Autowired
     ReviewService reviewService;
-    @PostMapping("/product/review")
-    public String submitReview(@RequestParam("gameId") Long gameId,
-                               @RequestParam("score") int score,
-                               @RequestParam("comment") String comment,
-                               Model model) {
-        Long userId = 26L;
-        String message =reviewService.saveReview(userId, gameId, score, comment);
-        // Xử lý dữ liệu (ví dụ: lưu vào cơ sở dữ liệu, xử lý logic đánh giá...)
-        System.out.println("Game ID: " + gameId);
-        System.out.println("Score: " + score);
-        System.out.println("Comment: " + comment);
 
-        // Để hiển thị thông báo hoặc trả về trang khác
-        model.addAttribute("message", message);
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    GameRepository gameRepository;
+    @PostMapping("/addReview")
+    public ResponseEntity<Boolean> addReview(@RequestBody ReviewRequest reviewRequest) {
+        User user = userRepository.findByEmail(reviewRequest.getUserEmail());
+        Game game = gameRepository.findGameByGameName(reviewRequest.getGameName());
+        Long gameId = game.getGameId();
+        reviewService.saveReview(user.getUserId(),gameId, reviewRequest.getScore(), reviewRequest.getComment());
 
-        // Trả về tên view (Ví dụ: "reviewSuccess" sẽ tương ứng với một file reviewSuccess.html)
-        return "redirect:/game/" + gameId;
+        return ResponseEntity.ok(true) ;
     }
 }
